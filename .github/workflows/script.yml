@@ -1,0 +1,19 @@
+name: Pipeline
+on:
+ push:
+  branches: ["main"]
+jobs:
+  build:
+   name: Minha primeira pipeline  
+   runs-on: ubuntu-latest
+   steps:     
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 8.0.x
+      - name: Checkout do código
+        uses: actions/checkout@v2
+      - name: Execução do teste de unidade
+        run: dotnet test ./CadastroAnimeSerie.API.Test
+      - name: Publicando a API
+        run: dotnet publish ./CadastroAnimeSerie.API
